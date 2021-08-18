@@ -13,7 +13,10 @@ fun PageTemplate.mainPage() {
             classes = setOf("box", "alt")
             div {
                 classes = setOf("row", "50%", "uniform")
-                //div(classes = "2u")
+                div {
+                    classes = setOf("2u")
+                    style = "height: 100px"
+                }
                 div {
                     classes = setOf("12u")
                     form {
@@ -45,7 +48,10 @@ fun PageTemplate.mainPage() {
                         }
                     }
                 }
-                //div(classes = "2u$")
+                div {
+                    classes = setOf("2u$")
+                    style = "height: 150px"
+                }
             }
         }
     }

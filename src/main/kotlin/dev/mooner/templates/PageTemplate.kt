@@ -5,6 +5,7 @@ import io.ktor.html.*
 import kotlinx.html.*
 
 class PageTemplate: Template<HTML> {
+    val head = Placeholder<HEAD>()
     val content = Placeholder<FlowContent>()
     val headTitle = Placeholder<FlowContent>()
     val pageSubTitle = Placeholder<FlowContent>()
@@ -19,8 +20,9 @@ class PageTemplate: Template<HTML> {
             }
             link {
                 rel = "stylesheet"
-                href = "static/main.css"
+                href = "/fishbucket/static/main.css"
             }
+            insert(head)
         }
         body {
             section {
@@ -51,9 +53,11 @@ class PageTemplate: Template<HTML> {
                             header {
                                 classes = setOf("align-center")
                                 p {
+                                    id = "pageSubTitle"
                                     insert(pageSubTitle)
                                 }
                                 h2 {
+                                    id = "pageTitle"
                                     insert(pageTitle)
                                 }
                             }

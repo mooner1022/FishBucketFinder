@@ -1,14 +1,15 @@
 package dev.mooner.pages
 
-import dev.mooner.PAGE_TITLE
-import dev.mooner.PAGE_TITLE_KR
 import dev.mooner.templates.PageTemplate
-import kotlinx.html.*
+import kotlinx.html.classes
+import kotlinx.html.div
+import kotlinx.html.img
+import kotlinx.html.span
 
-fun PageTemplate.notFoundPage() {
-    headTitle { + "404: Not Found" }
-    pageSubTitle { + "잠깐! 어딜 보시는 건가요!" }
-    pageTitle { + "이곳에는 아무것도 없습니다. 어떻게 들어온거죠?" }
+fun PageTemplate.illegalArgumentPage() {
+    headTitle { + "400: Bad Request" }
+    pageSubTitle { + "흐으으으음..." }
+    pageTitle { + "뭐라도 찾으시려는건진 모르겠지만 그런 요청을 보내진 마시죠." }
     content {
         div {
             classes = setOf("box", "alt")

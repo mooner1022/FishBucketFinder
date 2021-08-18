@@ -1,7 +1,7 @@
 package dev.mooner.plugins
 
-import dev.mooner.pages.mainPage
-import dev.mooner.pages.notFoundPage
+import dev.mooner.bucketSearcher
+import dev.mooner.pages.*
 import dev.mooner.templates.PageTemplate
 import io.ktor.routing.*
 import io.ktor.http.*
@@ -41,15 +41,34 @@ fun Application.configureRouting() {
     routing {
         route("/fishbucket") {
             static("static") {
-                preCompressed {
-                    resources("static/assets/css")
-                    resources("static/assets/images")
-                }
+                resources("static/assets/css")
+                resources("static/assets/js")
+                resources("static/assets/images")
             }
 
             get {
                 call.respondHtmlTemplate(PageTemplate()) {
                     mainPage()
+                }
+            }
+
+            route("/search") {
+                get {
+                    val queryName: String? = call.parameters["query"]
+                    if (queryName == null) {
+                        call.respondHtmlTemplate(PageTemplate()) {
+                            illegalArgumentPage()
+                        }
+                        return@get
+                    }
+                    val result = bucketSearcher.get(queryName)
+                    call.respondHtmlTemplate(PageTemplate()) {
+                        if (result == null) {
+                            noUserPage()
+                        } else {
+                            foundPage(Pair(queryName, result))
+                        }
+                    }
                 }
             }
         }
