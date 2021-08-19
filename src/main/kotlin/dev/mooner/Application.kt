@@ -29,11 +29,14 @@ fun exportPreprocessResult(buckets: Map<String, String>): Set<String> {
 }
 
 val bucketSearcher = BucketSearcher(File(PARENT_DIRECTORY, "chats.txt").path).also {
+    /*
     it.preProcess { buckets ->
         println("preProcess() done, exporting results...")
         exportPreprocessResult(buckets)
         println("successfully exported processed data.")
     }
+    */
+    it.load()
 }
 
 @KtorExperimentalLocationsAPI

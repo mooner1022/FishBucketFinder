@@ -6,7 +6,7 @@ import kotlinx.html.*
 
 fun PageTemplate.mainPage() {
     headTitle { + PAGE_TITLE_KR }
-    pageSubTitle { + "2021/05/24 ~ 2021/08/18 사이에 전송된 양동이를 찾을 수 있습니다." }
+    pageSubTitle { + "2021/01/01 ~ 2021/08/16 사이에 전송된 양동이를 찾을 수 있습니다." }
     pageTitle { + "검색하실 닉네임을 입력해주세요" }
     content {
         div {

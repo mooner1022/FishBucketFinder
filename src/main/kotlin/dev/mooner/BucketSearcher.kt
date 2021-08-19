@@ -3,6 +3,8 @@ package dev.mooner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.io.File
 
 class BucketSearcher(
@@ -38,7 +40,7 @@ class BucketSearcher(
                     if (!chat.startsWith("[\uD81A\uDD10 AlphaDo \uD81A\uDD10]") || !chat.matches(bucketRegex)) continue
                     val args = bucketRegex.findAll(chat).first().groupValues.drop(1)
                     if (args.size != 3) continue
-                    println(args[1])
+                    println(chat)
                     buckets[args[1]] = args[2]
                         .replaceFirst("\n", "───┬───────────────────\n")
                         .replaceAfterLast("\n", "───┴───────────────────")
@@ -50,6 +52,21 @@ class BucketSearcher(
                 onComplete(buckets)
             }
         }
+    }
+
+    fun load() {
+        val buckets: MutableMap<String, String> = hashMapOf()
+        val directory = File(PARENT_DIRECTORY, "preprocessed")
+        val usernames: Set<String> =
+            Json.decodeFromString(File(directory, "usernames.json").readText(Charsets.UTF_8))
+
+        for (name in usernames) {
+            val file = File(directory, Utils.checkFileName(name) + ".bucket")
+            if (file.exists() && file.isFile && file.extension == "bucket") {
+                buckets[name] = file.readText(Charsets.UTF_8)
+            }
+        }
+        this.cachedBuckets = buckets
     }
 
     fun get(name: String): String? = cachedBuckets[name]

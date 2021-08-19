@@ -1,9 +1,11 @@
 package dev.mooner.pages
 
-import dev.mooner.PAGE_TITLE
-import dev.mooner.PAGE_TITLE_KR
 import dev.mooner.templates.PageTemplate
-import kotlinx.html.*
+import kotlinx.html.classes
+import kotlinx.html.div
+import kotlinx.html.img
+import kotlinx.html.span
+import javax.management.Query.div
 
 fun PageTemplate.notFoundPage() {
     headTitle { + "404: Not Found" }
