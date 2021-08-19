@@ -56,15 +56,17 @@ class BucketSearcher(
     fun load() {
         val buckets: MutableMap<String, String> = hashMapOf()
         val directory = File(PARENT_DIRECTORY, "preprocessed")
-        val usernames: Set<String> =
+        val mappings: Map<String, String> =
             Json.decodeFromString(File(directory, "usernames.json").readText(Charsets.UTF_8))
+        println("found ${mappings.size} mappings")
 
-        for (name in usernames) {
-            val file = File(directory, Utils.checkFileName(name) + ".bucket")
-            if (file.exists() && file.isFile && file.extension == "bucket") {
+        for ((name, fileName) in mappings) {
+            val file = File(directory, "$fileName.bucket")
+            if (file.exists() && file.isFile) {
                 buckets[name] = file.readText(Charsets.UTF_8)
             }
         }
+        println("loaded ${buckets.size} users")
         this.cachedBuckets = buckets
     }
 

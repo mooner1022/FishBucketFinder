@@ -24,7 +24,9 @@ fun Application.configureHTTP() {
         method(HttpMethod.Get)
         method(HttpMethod.Post)
         allowCredentials = true
-        anyHost()
     }
-
+    install(HttpsRedirect) {
+        sslPort = 8443
+        permanentRedirect = true
+    }
 }

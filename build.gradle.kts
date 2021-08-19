@@ -6,6 +6,7 @@ plugins {
     application
     kotlin("jvm") version "1.5.21"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.21"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "dev.mooner"
@@ -26,10 +27,18 @@ dependencies {
     implementation("io.ktor:ktor-locations:$ktor_version")
     implementation("io.ktor:ktor-server-host-common:$ktor_version")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
     implementation("io.ktor:ktor-html-builder:$ktor_version")
-    implementation("io.ktor:ktor-serialization:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    manifest {
+        attributes(
+            "Main-Class" to "dev.mooner.ApplicationKt"
+        )
+    }
 }
