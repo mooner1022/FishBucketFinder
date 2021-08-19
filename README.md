@@ -12,7 +12,7 @@
 </p>
 
 <p align="center" style="color: gray">
-Currently in development!
+Currently in beta!
 </p>
 
 
