@@ -20,23 +20,27 @@ fun exportPreprocessResult(buckets: Map<String, String>): Set<String> {
     }
     val userNames: MutableSet<String> = hashSetOf()
     for ((name, bucket) in buckets) {
-        if (name !in userNames) userNames.add(name)
-        File(directory, "${Utils.checkFileName(name)}.bucket").writeText(bucket, Charsets.UTF_8)
+        if (name !in userNames) {
+            userNames.add(name)
+            File(directory, Utils.checkFileName(name) + ".bucket").writeText(bucket, Charsets.UTF_8)
+        }
     }
     val encoded = Json.encodeToString(userNames)
     File(directory, "usernames.json").writeText(encoded, Charsets.UTF_8)
     return userNames
 }
 
+const val loadFromChat = false
 val bucketSearcher = BucketSearcher(File(PARENT_DIRECTORY, "chats.txt").path).also {
-    /*
-    it.preProcess { buckets ->
-        println("preProcess() done, exporting results...")
-        exportPreprocessResult(buckets)
-        println("successfully exported processed data.")
+    if (loadFromChat) {
+        it.preProcess { buckets ->
+            println("preProcess() done, exporting results...")
+            exportPreprocessResult(buckets)
+            println("successfully exported processed data.")
+        }
+    } else {
+        it.load()
     }
-    */
-    it.load()
 }
 
 @KtorExperimentalLocationsAPI

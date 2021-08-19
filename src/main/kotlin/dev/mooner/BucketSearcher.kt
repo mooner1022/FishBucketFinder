@@ -40,7 +40,6 @@ class BucketSearcher(
                     if (!chat.startsWith("[\uD81A\uDD10 AlphaDo \uD81A\uDD10]") || !chat.matches(bucketRegex)) continue
                     val args = bucketRegex.findAll(chat).first().groupValues.drop(1)
                     if (args.size != 3) continue
-                    println(chat)
                     buckets[args[1]] = args[2]
                         .replaceFirst("\n", "───┬───────────────────\n")
                         .replaceAfterLast("\n", "───┴───────────────────")

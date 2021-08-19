@@ -33,7 +33,7 @@ fun PageTemplate.mainPage() {
                                     type = InputType.text
                                     name = "query"
                                     id = "query"
-                                    placeholder = "검색할 닉네임 입력..."
+                                    placeholder = "`칭호 + 이름` 을 입력해주세요. ex) 엉덩이가 탐스러운 무너"
                                 }
                             }
                             div {

@@ -20,7 +20,7 @@ fun PageTemplate.foundPage(result: Pair<String, String>) {
                         classes = setOf("actions")
                         li {
                             unsafe { +"""
-                                <a class="button special icon fa-search" data-clipboard-target="#bucket-result">
+                                <a class="button special" data-clipboard-target="#bucket-result" style="background-color:#635D5C">
                                     클립보드에 복사
                                 </a>
                                 """.trimIndent()
